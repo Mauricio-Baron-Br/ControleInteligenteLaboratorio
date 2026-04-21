@@ -15,7 +15,7 @@ Backend/Integração: [Inserir tecnologia, ex: Node.js, Python ou PHP].
 💻 Visual da Interface
 
 Exemplo da interface de controle exibindo sensores e painel de agendamento.
-
+![Texto Alternativo](fundo.jpg)
 📖 Uso
 Conexão: Selecione a porta e o Baud Rate no painel e clique em "Conectar".
 Agendamento: Marque os dias da semana e defina os horários para automatizar as tarefas.
