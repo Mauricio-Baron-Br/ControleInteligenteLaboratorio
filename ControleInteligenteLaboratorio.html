@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Inteligente de Laboratorio V1.0</title>
+    <link rel="shortcut icon" href="img/icon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="stylesheet/style.css">
+</head>
+<body>
+    <body onload="carregarConfiguracoes()">
+<main class="container">
+  <header>
+    <h1>Controle Inteligente de laboratorio</h1>
+    <div id="data-hora">--/--/---- 00:00:00</div>
+  </header>
+
+  <section class="sensor-grid">
+    <div class="sensor-card">
+      <span class="sensor-label">Temperatura</span>
+      <span id="temp-val" class="sensor-val">24.5°C</span>
+    </div>
+    <div class="sensor-card" style="border-left-color: var(--success);">
+      <span class="sensor-label">Umidade</span>
+      <span id="umid-val" class="sensor-val">55%</span>
+    </div>
+    <div class="sensor-card" style="border-left-color: var(--warning);">
+      <span class="sensor-label">Consumo Estimado</span>
+      <span class="sensor-val">1.2 kWh</span>
+    </div>
+  </section>
+
+  <button type="button" class="btn-panico" onclick="ativarPanico()">🚨 Protocolo de Pânico 🚨</button>
+
+  <section class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Estado</th>
+          <th>Ação</th>
+          <th>Horários</th>
+          <th>Agendamento Semanal</th>
+        </tr>
+      </thead>
+      <tbody id="dispositivos-body">
+        <!-- Luz -->
+        <tr>
+          <td>Luz Principal</td>
+          <td><span id="status-luz" class="status-badge bg-off">Apagada</span></td>
+          <td><button type="button" class="btn btn-ligar" id="btn-luz" onclick="alternarLuz()">Ligar</button></td>
+          <td>
+            <div class="horario-group">
+              <input type="time" id="hora-ligar-luz" onchange="salvarConfiguracoes()">
+              <input type="time" id="hora-desligar-luz" onchange="salvarConfiguracoes()">
+            </div>
+          </td>
+          <td>
+            <div class="dias-semana" id="dias-luz">
+              <label>Dom<input type="checkbox" value="0" onchange="salvarConfiguracoes()"></label>
+              <label>Seg<input type="checkbox" value="1" onchange="salvarConfiguracoes()"></label>
+              <label>Ter<input type="checkbox" value="2" onchange="salvarConfiguracoes()"></label>
+              <label>Qua<input type="checkbox" value="3" onchange="salvarConfiguracoes()"></label>
+              <label>Qui<input type="checkbox" value="4" onchange="salvarConfiguracoes()"></label>
+              <label>Sex<input type="checkbox" value="5" onchange="salvarConfiguracoes()"></label>
+              <label>Sáb<input type="checkbox" value="6" onchange="salvarConfiguracoes()"></label>
+            </div>
+          </td>
+        </tr>
+        <!-- Bancada -->
+        <tr>
+          <td>Bancada</td>
+          <td><span id="status-bancada" class="status-badge bg-off">Desligada</span></td>
+          <td><button type="button" class="btn btn-ligar" id="btn-bancada" onclick="alternarBancada()">Ligar</button></td>
+          <td>
+            <div class="horario-group">
+              <input type="time" id="hora-ligar-bancada" onchange="salvarConfiguracoes()">
+              <input type="time" id="hora-desligar-bancada" onchange="salvarConfiguracoes()">
+            </div>
+          </td>
+          <td>
+            <div class="dias-semana" id="dias-bancada">
+              <label>Dom<input type="checkbox" value="0" onchange="salvarConfiguracoes()"></label>
+              <label>Seg<input type="checkbox" value="1" onchange="salvarConfiguracoes()"></label>
+              <label>Ter<input type="checkbox" value="2" onchange="salvarConfiguracoes()"></label>
+              <label>Qua<input type="checkbox" value="3" onchange="salvarConfiguracoes()"></label>
+              <label>Qui<input type="checkbox" value="4" onchange="salvarConfiguracoes()"></label>
+              <label>Sex<input type="checkbox" value="5" onchange="salvarConfiguracoes()"></label>
+              <label>Sáb<input type="checkbox" value="6" onchange="salvarConfiguracoes()"></label>
+            </div>
+          </td>
+        </tr>
+<!-- SENSORES -->
+        <tr>
+          <td>Porta</td>
+          <td><span id="status-porta" class="status-badge">Fechada</span></td>
+          <td colspan="2">
+            <!-- <button class="btn btn-simular" onclick="alternarSensor('porta')">Simular Porta</button>-->
+           <span id="aviso-porta" class="alerta-texto"></span>
+          </td>
+          <!--Seleciona porta serial-->
+            <td rowspan="3">
+            <strong>Porta Serial:</strong>
+                <select id="baudRate">
+                    <option value="9600">9600 Baud</option>
+                    <option value="115200">115200 Baud</option>
+                </select>
+                
+                <button id="btnConectar" class="btn-conectar" onclick="conectarSerial()">Conectar</button>
+                <button id="btnDesconectar" class="btn-desconectar" onclick="desconectarSerial()" disabled>Desconectar</button>
+                
+                <hr>
+                
+                <input type="text" id="inputComando" placeholder="Digite um comando..." disabled>
+                <button id="btnEnviar" class="btn-enviar" onclick="enviarDados()" disabled>Enviar</button>
+
+                <div id="log">Status: Desconectado</div>
+            </td>
+          <!---->  
+        <tr>
+          <td>Janela</td>
+          <td><span id="status-janela" class="status-badge">Fechada</span></td>
+          <td colspan="2">
+           <!-- <button class="btn btn-simular" onclick="alternarSensor('janela')">Simular Janela</button> -->
+            <span id="aviso-janela" class="alerta-texto"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+      </tbody>
+    </table>
+  </section>
+
+  <footer id="log-lista"></footer>
+</main>
+<script src="js/script.js" defer></script>
+
+</body>
+</html>

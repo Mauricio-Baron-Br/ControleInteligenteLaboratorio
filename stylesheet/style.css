@@ -1,0 +1,133 @@
+/* style.css */
+ :root {
+      --primary: #3498db;
+      --danger: #e74c3c;
+      --warning: #f39c12;
+      --success: #2ecc71;
+      --bg: #f8f9fa;
+      --dark: #2c3e50;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      margin: 0;
+      padding: 15px;
+      color: var(--dark);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    header { text-align: center; margin-bottom: 25px; }
+    h1 { margin: 0; font-size: 1.8rem; }
+    #data-hora { font-weight: 600; color: #7f8c8d; margin-top: 5px; }
+
+    /* Painel de Sensores */
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .sensor-card {
+      background: #f1f2f6;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border-left: 5px solid var(--primary);
+    }
+
+    .sensor-val { font-size: 1.5rem; font-weight: bold; color: var(--dark); display: block; }
+    .sensor-label { font-size: 0.8rem; text-transform: uppercase; color: #636e72; }
+
+    /* Botão de Pânico */
+    .btn-panico {
+      background-color: #000;
+      color: #ff4d4d;
+      border: 2px solid #ff4d4d;
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .btn-panico:hover { background: #1a1a1a; }
+
+    /* Tabela */
+    .table-container { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 800px; }
+    th { background: #fcfcfc; text-align: left; padding: 12px; border-bottom: 2px solid #eee; }
+    td { padding: 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
+
+    /* Controles */
+    .btn { padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+    .btn-ligar { background: var(--success); color: var(--white); }
+    .btn-desligar { background: var(--warning); color: var(--white); }
+    
+    .status-badge { padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+    .bg-on { background: #d4edda; color: #155724; }
+    .bg-off { background: #f8d7da; color: #721c24; }
+
+    .dias-semana { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .dias-semana label { 
+      display: flex; flex-direction: column; align-items: center; 
+      background: #eee; padding: 4px; border-radius: 4px; font-size: 0.65rem; cursor: pointer;
+    }
+
+    /* Logs */
+    #log-lista {
+      height: 150px;
+      overflow-y: auto;
+      background: var(--dark);
+      color: #bdc3c7;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.85rem;
+      margin-top: 25px;
+    }
+    .log-item { border-bottom: 1px solid #34495e; padding: 3px 0; }
+    .log-time { color: var(--primary); }
+
+    @media (max-width: 600px) {
+      .dias-semana { grid-template-columns: repeat(2, 1fr); }
+    }
+/* BOTÕES E BADGES */
+    .btn { padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .btn-ligar { background: var(--success); color: white; }
+    .btn-desligar { background: var(--warning); color: white; }
+    .btn-simular { background: var(--primary); color: white; width: 100%; }
+ .status-badge { padding: 5px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+    .bg-on { background: #d4edda; color: #155724; }
+    .bg-off { background: #f8d7da; color: #721c24; }
+    .alerta-texto { color: var(--danger); font-size: 0.75em; display: block; margin-top: 5px; font-weight: bold; }
+
+    .horario-group { display: flex; flex-direction: column; gap: 4px; font-size: 0.8em; }
+    input[type="time"] { border: 1px solid #ddd; border-radius: 4px; padding: 2px; }
+/*BOTAO CONECSAO
+ /* Cores dos botões */
+        .btn-conectar { background-color: #007bff; color: white; border: none; }
+        .btn-desconectar { background-color: #dc3545; color: white; border: none; }
+        .btn-enviar { background-color: #28a745; color: white; border: none; }
+        
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        button:hover:not(:disabled) { opacity: 0.8; cursor: pointer; }
+        
+        #log { margin-top: 15px; padding: 10px; background: #333; color: #0f0;
+           height: 120px; overflow-y: auto; font-family: 'Courier New', monospace;
+            font-size: 12px; border-radius: 4px; white-space: pre-wrap; }    
+
